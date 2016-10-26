@@ -13,7 +13,7 @@ import cv_bridge
 
 import baxter_interface
 
-import moveit_commander
+import moveit_commander.msg
 import moveit_msgs.msg
 import geometry_msgs.msg
 

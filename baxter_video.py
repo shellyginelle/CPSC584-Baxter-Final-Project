@@ -23,8 +23,6 @@ from sensor_msgs.msg import ( Image, )
 
 from kbhit import *
 
-#<!-- The semantic description that corresponds to the URDF --> <param name="robot_description_semantic"textfile= "$(find pr2_moveit_config)/config/pr2.srdf"/>
-
 class Baxter(object):
 
     def __init__(self):
@@ -57,15 +55,15 @@ class Baxter(object):
 
     def on_running(self):
 
-	#while (not rospy.is_shutdown()):
+	while (not rospy.is_shutdown()):
 
-		self.on_state_V()
+		self.on_state_N()
 
-        #rospy.signal_shutdown("Quitting.")
+        rospy.signal_shutdown("Quitting.")
 
     def on_shutdown(self):
 
-        #self.set_head_neutral()
+        self.set_head_neutral()
 
         if not self._init_state and self._rs.state().enabled:
             self._rs.disable()
@@ -78,94 +76,6 @@ class Baxter(object):
 
 	moveit_commander.roscpp_shutdown()
 	moveit_commander.os._exit(0)
-
-    """ Video functions """
-
-    def on_state_V(self):
-
-	# robot sets neutral position
-	self.set_neutral_position()
-
-	# robot pan head to the right
-	self._head.set_pan(BaxterConfig.states['S']['head_angle'], BaxterConfig.states['S']['head_speed'], timeout=0)
-
-        # robot sets look right eyes
-    	self.set_face(BaxterConfig.states['S']['facial_expressions']['eyes_opened'])    
-
-	# wait for hit key
-	kb = KBHit()
-
-	while True:
-		self.blink(self._head_face, BaxterConfig.states['S']['facial_expressions']['eyes_closed'], BaxterConfig.mental_states[self._mental_state]['blink_duration'])
-
-		if (kb.kbhit()):
-		      key = kb.getch()
-		      key = key.upper()
-	
-		      if (key == "C"):
-			kb.set_normal_term()
-			break
-
-		rospy.sleep(1)
-
-    	# robot sets look left eyes
-	self.set_face(BaxterConfig.states['A']['facial_expressions']['eyes_opened'])
-
-    	# robot sets "watchful" pose	
-	self._moveit_both.set_joint_value_target(BaxterConfig.states['C']['joint_values'])
-
-	plan_phone = self._moveit_both.plan()
-	
-	self._moveit_both.go(wait=False)
-
-	self.blink(self._head_face, BaxterConfig.states['A']['facial_expressions']['eyes_closed'], BaxterConfig.mental_states[self._mental_state]['blink_duration'])
-	
-	#rospy.sleep(2)
-
-	# robot pan head to the left
-	self._head.set_pan(BaxterConfig.states['A']['head_angle'], BaxterConfig.states['A']['head_speed'], timeout=0)
-
-	rospy.sleep(1)
-
-    	# robot set normal eyes
-
-	self._head_face = BaxterConfig.states['P']['facial_expressions']['eyes_opened2']
-
-	self.blink(self._head_face, BaxterConfig.states['P']['facial_expressions']['eyes_closed'], BaxterConfig.mental_states[self._mental_state]['blink_duration'])
-
-	self.set_face(BaxterConfig.states['P']['facial_expressions']['eyes_opened2'])
-
-	#self.blink(self._head_face, BaxterConfig.states['P']['facial_expressions']['eyes_closed'], BaxterConfig.mental_states[self._mental_state]['blink_duration'])
-
-	#self.blink(self._head_face, BaxterConfig.states['P']['facial_expressions']['eyes_closed'], BaxterConfig.mental_states[self._mental_state]['blink_duration'])
-	
-	rospy.sleep(1)
-
-   	# robot sets squinting eyes
-	#self.set_face(BaxterConfig.states['P']['facial_expressions']['eyes_squinting'])
-
-	#rospy.sleep(1)
-
-	# robot sets down eyes
-	self.set_face(BaxterConfig.states['P']['facial_expressions']['eyes_down'])
-    	
-	#rospy.sleep(1)
-
-   	# robot sets normal eyes
-	self.set_face(BaxterConfig.states['P']['facial_expressions']['eyes_opened2'])
-
-	rospy.sleep(1)
-
-	# move to the "asking-for-phone" pose
-	self._moveit_both.set_joint_value_target(BaxterConfig.states['C']['joint_values2'])
-
-	plan_phone2 = self._moveit_both.plan()
-	
-	# move to the "asking-for-phone" pose
-	self._moveit_both.go(wait=True)
-
-	# quit the program
-	rospy.signal_shutdown("Quitting.")
 
     """ state functions """
 
@@ -202,7 +112,7 @@ class Baxter(object):
 	self._head.set_pan(BaxterConfig.states['P']['head_angle'], BaxterConfig.states['A']['head_speed'], timeout=0)
 
 	# robot goes to random state 
-	#self.on_state_R()
+	self.on_state_R()
 
     def on_state_N(self):
 	print ('Starting state N')
@@ -698,9 +608,9 @@ class Baxter(object):
     def set_limbs_neutral(self):
 
 	# clear up anything that might be left over from other programs
-   	#self._moveit_left.clear_pose_targets()
-    	#self._moveit_right.clear_pose_targets()
-    	#self._moveit_both.clear_pose_targets()
+   	self._moveit_left.clear_pose_targets()
+    	self._moveit_right.clear_pose_targets()
+    	self._moveit_both.clear_pose_targets()
 	
 	# set the neutral pose
 	self._moveit_both.set_joint_value_target(BaxterConfig.states['S']['joint_values'])
@@ -1120,85 +1030,6 @@ class BaxterConfig:
 	}
 
 	states = {
-		'C': {
-			'pose': {
-				'limb_name': 'left_limb',
-				'pose_name': 'phone_gesture'
-			},
-			'gesture_duration': 0,
-			'joint_values' : {
-				'right_s0': -0.7,	
-				'right_s1': 0.8,
-				'right_e0': 1.13,
-				'right_e1': 1.6,
-				'right_w0': -0.61,
-				'right_w1': 1.26,
-				'right_w2': 0.25,
-
-				'left_w0': 0.5399612367187501, 
-				'left_w1': 1.2160632682067871, 
-				'left_w2': -0.2439029449951172, 
-				'left_e0': -1.1777137485534668, 
-				'left_e1': 1.5036846656066896, 
-				'left_s0': 0.568339881262207, 
-				'left_s1': 0.7662234026733399
-			},
-			'joint_values2' : {
-
-				#'right_s0': -0.93, 
-				#'right_s1': 1.04, 
-				#'right_w0': -0.6, 
-				#'right_w1': 0.44, 
-				#'right_w2': 0.12, 
-				#'right_e0': 1.56,
-				'right_s0': -0.77, 
-				'right_s1': 0.9,
-				'right_e0': 1.23, 
-				'right_e1': 1.48,
-				'right_w0': -0.05, 
-				'right_w1': 0.61, 
-				'right_w2': 0.07, 
-				
-
-				'left_w0': 0.4759175388977051, 
-				'left_w1': 0.77581078258667, 
-				'left_w2': 0.13690778516235352, 
-
-				'left_e0': -1.5, 
-				'left_e1': 1.3, 
-
-				'left_s0': 0.23, 
-				'left_s1': 0.9
-
-				#'left_w0': 0.5399612367187501, 
-				#'left_w1': 1.2160632682067871, 
-				#'left_w2': -0.2439029449951172, 
-
-				#'left_e0': -1.1777137485534668, 
-				#'left_e1': 1.5036846656066896, 
-
-				#'left_s0': 0.568339881262207, 
-				#'left_s1': 0.7662234026733399
-
-
-
-				# Pose 1
-				#'left_s0': -0.45,
-				#'right_s0': -0.93,	
-				#'left_s1': 0.98,
-				#'right_s1': 1.04,
-				#'left_e0': -2.19,
-				#'right_e0': 1.56,
-				#'left_e1': 1.71,
-				#'right_e1': 1.6,
-				#'left_w0': 1.49,
-				#'right_w0': -0.58,
-				#'left_w1': 0.68,
-				#'right_w1': 0.44,
-				#'left_w2': -0.09,
-				#'right_w2': 0.12
-			}
-		},
 		'N': {
 			'head_angle' : 0.3,
 			'facial_expressions' : {
@@ -1224,10 +1055,8 @@ class BaxterConfig:
 		},
 		'S': {
 			'head_angle' : 0.5,
-			'head_speed': 20,
 			'facial_expressions' : {
 				'eyes_opened' : '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_lateral_left.png',
-				'eyes_closed': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_closed.png',
 				'eyes_squinting': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_squinting_left.png',
 			},
 			'joint_values' : {
@@ -1251,10 +1080,9 @@ class BaxterConfig:
 			'head_angle': -0.5,
 			'head_speed': 20,
 			'facial_expressions': {
-				'eyes_opened': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_lateral_right.png',
+				'eyes_opened': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_normal.png',
 				'eyes_closed': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_closed.png',
 				'eyes_squinting': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_squinting_right.png',
-				'eyes_down': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_down.png'
 			}
 		},
 		'P': {
@@ -1262,10 +1090,8 @@ class BaxterConfig:
 			'head_speed': 20,
 			'facial_expressions': {
 				'eyes_opened': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_normal.png',
-				'eyes_opened2': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_normal2.png',
 				'eyes_closed': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_closed.png',
 				'eyes_squinting': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_squinting_normal.png',
-				'eyes_down': '/home/acamp/ros/baxter_ws/roberta/imgs/eyes_down.png'
 			}
 		},
 		'R': {
@@ -1347,31 +1173,23 @@ class BaxterConfig:
 class Poses:
 	
 	pos_left_limb = {
-		'neutral': [0.406787255674, 0.153500773065, 0.154251527081],
-
-		'phone_gesture': [0.7137212555650616, -0.19438931432328346, 0.21497999129857615]
+		'neutral': [0.406787255674, 0.153500773065, 0.154251527081]
 	}
 
 	pos_right_limb = {
 		'neutral': [0.387671394699, -0.0752369755022, 0.125284016146],
-		'gesture': [0.4250791438990996, -0.27152458256337453, 0.5699210863444762],
+		'gesture': [0.4250791438990996, -0.27152458256337453, 0.5699210863444762]
 		#'gesture': [0.4383728285180027, -0.22323680298249368, 0.4895174593389644]
-
-		'phone_gesture': [0.710432081605721, -0.44577004895817207, 0.21224146528099863]
 	}
 
 	orient_left_limb = {
-		'neutral': [0.0189057104743, -0.651678663372, 0.726755236455, 0.216296833315],
-
-		'phone_gesture': [0.050702494011949824, 0.7073086568025925, -0.6646810907023312, 0.23525043841795562]
+		'neutral': [0.0189057104743, -0.651678663372, 0.726755236455, 0.216296833315]
 	}
 
 	orient_right_limb = {
 		'neutral': [0.166720846472, 0.63595625386, 0.688455334138, -0.306256518993],
-		'gesture': [-0.05776682733491439, 0.2459336314709397, 0.9631972614404489, -0.09181872426032409],
+		'gesture': [-0.05776682733491439, 0.2459336314709397, 0.9631972614404489, -0.09181872426032409]
 		#'gesture': [-0.1192161420959143, 0.42146758880386914, 0.8966402454594457, -0.06472135099056757]
-
-		'phone_gesture': [0.44546171509714305, 0.38443411088356627, 0.755214727913393, 0.28883384412941165]
 	}
 
 	@staticmethod

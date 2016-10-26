@@ -1,0 +1,37 @@
+
+cd ~/ros/baxter_ws
+./baxter.sh
+rosrun baxter_tools enable_robot.py -e
+rosrun baxter_tools enable_robot.py -d
+
+cd ~/ros/baxter_ws
+./baxter.sh
+rosrun baxter_tools tuck_arms.py -u
+rosrun baxter_tools tuck_arms.py -t
+
+cd ~/ros/baxter_ws
+./baxter.sh
+rosrun baxter_interface joint_trajectory_action_server.py
+
+// deprecated
+cd ~/ros/baxter_ws
+./baxter.sh
+rostopic echo /robot/joint_states | rostopic pub /joint_states sensor_msgs/JointState
+
+cd ~/ros/baxter_ws
+./baxter.sh
+cd roberta/util/
+python remap_joint_states.py
+
+cd ~/ros/baxter_ws
+./baxter.sh
+roslaunch baxter_moveit_config baxter.launch
+
+# Others
+
+cd ~/ros/baxter_ws
+./baxter.sh
+cd roberta/
+python baxter_trustor.py
+
+rosrun baxter_examples xdisplay_image.py --file='/home/acamp/ros/baxter_ws/normal.jpg'

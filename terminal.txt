@@ -1,0 +1,88 @@
+acamp@ACAMP-CGY-B2:~$ cd ~/ros/baxter_ws
+acamp@ACAMP-CGY-B2:~/ros/baxter_ws$ ./baxter.sh
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws$ rosrun baxter_tools enable_robot.py -e
+[INFO] [WallTime: 1477335636.243771] Robot Enabled
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws$ rosrun baxter_tools tuck_arms.py -u
+[INFO] [WallTime: 1477335642.629854] Untucking arms
+[INFO] [WallTime: 1477335642.817883] Moving head to neutral position
+[INFO] [WallTime: 1477335642.820618] Untucking: One or more arms Tucked; Disabling Collision Avoidance and untucking.
+[INFO] [WallTime: 1477335649.925777] Finished tuck
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws$ cd CPSC584-Baxter-Final-Project
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project$ python hello_world_v1.py
+usage: hello_world_v1.py [-h] -l {left,right} [-s SPEED] [-a ACCURACY]
+hello_world_v1.py: error: argument -l/--limb is required
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project$ python hello_world_v1.py -l right
+Initializing node... 
+Getting robot state... 
+Enabling robot... 
+[INFO] [WallTime: 1477335740.614471] Robot Enabled
+[INFO] [WallTime: 1477335740.693848] Waypoint Recording Started
+Press Navigator 'OK/Wheel' button to record a new joint joint position waypoint.
+Press Navigator 'Rethink' button when finished recording waypoints to begin playback
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+[INFO] [WallTime: 1477335806.111713] Waypoint Playback Started
+  Press Ctrl-C to stop...
+Waypoint playback loop #1 
+^C
+Exiting example...
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project$ python hello_world_v1.py -l right
+Initializing node... 
+Getting robot state... 
+Enabling robot... 
+[INFO] [WallTime: 1477335839.114245] Robot Enabled
+[INFO] [WallTime: 1477335839.183963] Waypoint Recording Started
+Press Navigator 'OK/Wheel' button to record a new joint joint position waypoint.
+Press Navigator 'Rethink' button when finished recording waypoints to begin playback
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+[INFO] [WallTime: 1477335901.606317] Waypoint Playback Started
+  Press Ctrl-C to stop...
+Waypoint playback loop #1 
+^C
+Exiting example...
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project$ cd
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~$ cd ~/ros/baxter_ws
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws$ rosrun baxter_examples xdisplay_image.py -f normal.jpg
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws$ cd CPSC584-Baxter-Final-Project
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project$ python hello_world_v1.py
+usage: hello_world_v1.py [-h] -l {left,right} [-s SPEED] [-a ACCURACY]
+hello_world_v1.py: error: argument -l/--limb is required
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project$ python hello_world_v1.py -l right
+Initializing node... 
+Getting robot state... 
+Enabling robot... 
+[INFO] [WallTime: 1477336665.333220] Robot Enabled
+[INFO] [WallTime: 1477336665.404637] Waypoint Recording Started
+Press Navigator 'OK/Wheel' button to record a new joint joint position waypoint.
+Press Navigator 'Rethink' button when finished recording waypoints to begin playback
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+Waypoint Recorded
+[INFO] [WallTime: 1477336691.781451] Waypoint Playback Started
+  Press Ctrl-C to stop...
+Waypoint playback loop #1 
+^C
+Exiting example...
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project$ cd util
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project/util$ python get_pose.py
+Running. Ctrl-c to quit
+============ Current right limb pose:  {'position': Point(x=0.014266019137536525, y=-0.7671803280329702, z=0.6027763723089461), 'orientation': Quaternion(x=0.2248176879261022, y=0.2520458082359457, z=-0.7015554546870891, w=0.6274949097363594)}
+============ Current left limb pose:  {}
+============ Current right limb pose:  {'position': Point(x=0.014414147980710801, y=-0.7671650605557262, z=0.6030558532204773), 'orientation': Quaternion(x=0.22447205473911955, y=0.25189530017258865, z=-0.7014557067173515, w=0.6277905270914973)}
+============ Current left limb pose:  {'position': Point(x=0.08805117078960871, y=0.5238672381861572, z=0.12102100551946261), 'orientation': Quaternion(x=-0.058914712590107415, y=0.993326124508298, z=-0.0933259052088247, w=0.03350436429338329)}
+[baxter - http://gretyl.local:11311] acamp@ACAMP-CGY-B2:~/ros/baxter_ws/CPSC584-Baxter-Final-Project/util$ 
+
