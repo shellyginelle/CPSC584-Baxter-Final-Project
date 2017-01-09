@@ -1,8 +1,8 @@
 # Baxter-Based Mirror Game
 
-CPSC 584 - Human Robot Interaction
-Shelly-Ginelle Sicat & Shreya Chopra
-Baxter-Based Mirror Game
+<br><i>CPSC 584 - Human Robot Interaction
+<br>Shelly-Ginelle Sicat and Shreya Chopra
+<br>Baxter-Based Mirror Game</i>
 
 Playful interactions serve an important role in human development and interpersonal bonding [7]. Accordingly, human-robot interaction investigates on the importance of implementing aspects of social interaction and human behavior onto humanoid robots [5]. However, to implement such traits requires investigation into several aspects of psychology or sociology. As a humanoid developer, it is important to question whether robots need to encompass the same way of thinking as humans. In attempt to contribute to this paradigm we will be investigating on the popular topic of deception. Can robots make one believe something that is not true to gain some personal advantage? Should robots adopt this type of behavior? How would people react to a robot that is purposely attempting to deceive them? This paper investigates on the existing state-of-the-art, an implementation of a Baxter-based mirror game and how we aim to delve deeper into the discussion about humanoids potentially having a mind of their own.
 
