@@ -11,18 +11,18 @@ This software project encompasses the communication between human and robot inte
 ### Quickstart
 Please run the following commands into ros to execute the program.
 
-<!--Start - Enable and Untuck Baxter-->
+//Start - Enable and Untuck Baxter
 cd ~/ros/baxter_ws
 ./baxter.sh
 rosrun baxter_tools enable_robot.py -e
 rosrun baxter_tools tuck_arms.py -u
 
-<!--Go to our Project Folder-->
+//Go to our Project Folder
 cd CPSC584-Baxter-Final-Project/baxter_examples/scripts
 
-<!--Run This File To Start Game-->
+//Run This File To Start Game
 python keyboard_control.py
 
-<!--End - Disable and Tuck Baxter-->
+//End - Disable and Tuck Baxter
 rosrun baxter_tools tuck_arms.py -t
 rosrun baxter_tools enable_robot.py -d
