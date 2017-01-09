@@ -299,40 +299,6 @@ def send_image(path):
     rospy.sleep(0.5)
 
 def main():
-	#set the gesture pose
-	"""pose_target_right = Poses.get_pose(BaxterConfig.states['G']['pose']['limb_name'], BaxterConfig.states['G']['pose']['pose_name'])
-
-	get_pose(left_limb, neutral)
-	get_pose(right_limb, neutral)"""
-
-	"""RSDK Joint Position Waypoints Example
-
-	Records joint positions each time the navigator 'OK/wheel'
-	button is pressed.
-	Upon pressing the navigator 'Rethink' button, the recorded joint positions
-	will begin playing back in a loop.
-	
-	arg_fmt = argparse.RawDescriptionHelpFormatter
-	parser = argparse.ArgumentParser(formatter_class=arg_fmt,
-			             description=main.__doc__)
-	required = parser.add_argument_group('required arguments')
-	required.add_argument(
-	'-l', '--limb', required=True, choices=['left', 'right'],
-	help='limb to record/playback waypoints'
-	)
-	parser.add_argument(
-	'-s', '--speed', default=0.3, type=float,
-	help='joint position motion speed ratio [0.0-1.0] (default:= 0.3)'
-	)
-	parser.add_argument(
-	'-a', '--accuracy',
-	default=baxter_interface.settings.JOINT_ANGLE_TOLERANCE, type=float,
-	help='joint position accuracy (rad) at which waypoints must achieve'
-	)
-	args = parser.parse_args(rospy.myargv()[1:])
-
-	print("Initializing node... ")
-	rospy.init_node("rsdk_joint_position_waypoints_%s" % (args.limb,))"""
 
 	# Initialize the node
 	print("Initializing node... ")
