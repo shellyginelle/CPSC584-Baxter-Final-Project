@@ -1,0 +1,23 @@
+CPSC 584 - Human Robot Interaction
+Shelly-Ginelle Sicat & Shreya Chopra
+Baxter-Based Mirror Game
+
+<!--Enable and Untuck Baxter-->
+cd ~/ros/baxter_ws
+./baxter.sh
+rosrun baxter_tools enable_robot.py -e
+rosrun baxter_tools tuck_arms.py -u
+
+<!--Disable and Tuck Baxter-->
+rosrun baxter_tools tuck_arms.py -t
+rosrun baxter_tools enable_robot.py -d
+
+<!--Go to our Project Folder-->
+cd CPSC584-Baxter-Final-Project/baxter_examples/scripts
+
+<!--Main Baxter Example Used-->
+python joint_position_keyboard.py
+
+<!--Our Files-->
+python keyboard_control.py
+
